@@ -1,0 +1,51 @@
+{
+  "genreInfluence": {
+    "pop": {"extraversion": 2, "openness": -1},
+    "rock": {"extraversion": 1, "agreeableness": 0},
+    "hip hop": {"extraversion": 2, "agreeableness": -1},
+    "electronic": {"openness": 1, "conscientiousness": -1},
+    "classical": {"openness": 2, "conscientiousness": 1},
+    "jazz": {"openness": 2, "agreeableness": 1},
+    "metal": {"extraversion": -1, "agreeableness": -2},
+    "indie": {"openness": 1, "extraversion": -1},
+    "ambient": {"agreeableness": 2, "neuroticism": -1},
+    "folk": {"agreeableness": 1, "openness": 1}
+  },
+  "audioFeatureInfluence": {
+    "valence": {
+      "low": {"neuroticism": 2, "agreeableness": -1},
+      "mid": {},
+      "high": {"agreeableness": 2, "neuroticism": -2}
+    },
+    "danceability": {
+      "low": {"openness": 1},
+      "mid": {},
+      "high": {"extraversion": 2}
+    },
+    "energy": {
+      "low": {"neuroticism": 1},
+      "mid": {},
+      "high": {"extraversion": 1}
+    },
+    "acousticness": {
+      "high": {"agreeableness": 1},
+      "low": {}
+    }
+  },
+  "popularityInfluence": {
+    "low": {"openness": 1},
+    "medium": {},
+    "high": {"conscientiousness": 1}
+  },
+  "thresholds": {
+    "genreCountHigh": 7,
+    "valenceLow": 0.3,
+    "valenceHigh": 0.7,
+    "danceabilityLow": 0.3,
+    "danceabilityHigh": 0.7,
+    "energyLow": 0.3,
+    "energyHigh": 0.7,
+    "popularityLow": 30,
+    "popularityHigh": 70
+  }
+}
