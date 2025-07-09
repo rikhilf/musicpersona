@@ -52,6 +52,11 @@ export function useSpotifyToken() {
           
           // Use the Vercel backend endpoint for code exchange
 
+
+          console.log('About to POST to backend:', {
+            code,
+            redirectUri,
+          });
           
           const apiBaseUrl = process.env.EXPO_PUBLIC_API_BASE_URL || '';
           console.log('apiBaseUrl:', apiBaseUrl);
