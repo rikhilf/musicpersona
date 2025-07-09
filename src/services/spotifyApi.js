@@ -55,19 +55,24 @@ export function useSpotifyToken() {
 
           console.log('About to POST to backend:', {
             code,
-            redirectUri,
+            REDIRECT_URI,
           });
-          
+
           const apiBaseUrl = process.env.EXPO_PUBLIC_API_BASE_URL || '';
           console.log('apiBaseUrl:', apiBaseUrl);
+
+          const { codeVerifier } = request;
+          console.log('codeVerifier:', codeVerifier);
+
           const tokenResponse = await fetch(`${apiBaseUrl}/api/spotify-auth`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              code,
+              code: code,
               redirectUri: REDIRECT_URI,
+              codeVerifier: codeVerifier,
             }),
           });
           

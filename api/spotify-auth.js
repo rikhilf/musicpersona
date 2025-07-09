@@ -19,9 +19,9 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  const { code, redirectUri } = req.body;
-  if (!code || !redirectUri) {
-    return res.status(400).json({ error: 'Missing code or redirectUri' });
+  const { code, redirectUri, codeVerifier } = req.body;
+  if (!code || !redirectUri || !codeVerifier) {
+    return res.status(400).json({ error: 'Missing code, redirectUri, or codeVerifier' });
   }
 
   const params = new URLSearchParams();
@@ -30,6 +30,7 @@ export default async function handler(req, res) {
   params.append('redirect_uri', redirectUri);
   params.append('client_id', process.env.SPOTIFY_CLIENT_ID);
   params.append('client_secret', process.env.SPOTIFY_CLIENT_SECRET);
+  params.append('code_verifier', codeVerifier);
 
   console.log('Sending params:', params.toString());
   try {
