@@ -1,50 +1,129 @@
-# Welcome to your Expo app 👋
+# MusicPersona
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A React Native app that analyzes your Spotify listening habits to determine your personality traits using the Big Five personality model.
 
-## Get started
+## Features
 
-1. Install dependencies
+- Spotify OAuth authentication
+- Fetches top artists and tracks from Spotify
+- Analyzes audio features to compute personality scores
+- Displays results with charts and narrative summaries
+- Shareable results
 
-   ```bash
-   npm install
-   ```
+## Setup
 
-2. Start the app
+### 1. Prerequisites
 
-   ```bash
-   npx expo start
-   ```
+- Node.js (v16 or higher)
+- Expo CLI
+- Spotify Developer Account
+- Vercel Account (for backend)
 
-In the output, you'll find options to open the app in a
+### 2. Spotify Setup
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+1. Go to [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/applications)
+2. Create a new app
+3. Add redirect URIs:
+   - `http://localhost:8081` (for web development)
+   - `https://auth.expo.io/@rfellner/musicpersona` (for device testing)
+4. Copy your Client ID and Client Secret
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### 3. Environment Variables
 
-## Get a fresh project
+Create a `.env` file in the root directory:
 
-When you're ready, run:
-
-```bash
-npm run reset-project
+```env
+SPOTIFY_CLIENT_ID=your_spotify_client_id
+SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 4. Vercel Backend Setup
 
-## Learn more
+1. Install Vercel CLI:
+   ```bash
+   npm i -g vercel
+   ```
 
-To learn more about developing your project with Expo, look at the following resources:
+2. Deploy the backend:
+   ```bash
+   vercel
+   ```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+3. Set environment variables in Vercel:
+   ```bash
+   vercel env add SPOTIFY_CLIENT_ID
+   vercel env add SPOTIFY_CLIENT_SECRET
+   ```
 
-## Join the community
+### 5. Install Dependencies
 
-Join our community of developers creating universal apps.
+```bash
+npm install
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### 6. Run the App
+
+For web development:
+```bash
+npx expo start --tunnel
+```
+
+For iOS simulator:
+```bash
+npx expo start --ios
+```
+
+For Android emulator:
+```bash
+npx expo start --android
+```
+
+## Project Structure
+
+```
+musicpersona/
+├── api/
+│   └── spotify-auth.js          # Vercel serverless function
+├── src/
+│   ├── components/
+│   │   ├── BarChart.js          # OCEAN scores visualization
+│   │   └── ShareButton.js       # Share functionality
+│   ├── screens/
+│   │   ├── LoginScreen.js       # Spotify OAuth
+│   │   ├── HomeScreen.js        # Main action screen
+│   │   ├── LoadingScreen.js     # Data fetching
+│   │   └── ResultScreen.js      # Results display
+│   ├── services/
+│   │   ├── spotifyApi.js        # Spotify API calls
+│   │   ├── scoringEngine.js     # Personality computation
+│   │   └── storage.js           # AsyncStorage wrapper
+│   └── theme.js                 # App theming
+├── personalityMapping.json       # Personality mapping rules
+└── vercel.json                  # Vercel configuration
+```
+
+## How It Works
+
+1. **Authentication**: User logs in with Spotify OAuth
+2. **Data Fetching**: App fetches top artists, tracks, and audio features
+3. **Analysis**: Personality scores are computed using the mapping rules
+4. **Results**: User sees their personality breakdown with charts and narrative
+
+## Troubleshooting
+
+### OAuth Issues
+- Make sure redirect URIs match exactly in Spotify Dashboard
+
+- For device: use `https://auth.expo.io/@rfellner/musicpersona`
+
+### Backend Issues
+- Ensure Vercel environment variables are set correctly
+- Check Vercel function logs for errors
+
+### Development
+- Use tunnel mode for testing OAuth on device
+- Clear browser cache if OAuth popup issues persist
+
+## License
+
+MIT

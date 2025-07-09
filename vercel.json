@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/spotify-auth.js": {
+      "maxDuration": 10
+    }
+  }
+} 
