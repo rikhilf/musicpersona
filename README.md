@@ -2,6 +2,9 @@
 
 A React Native app that analyzes your Spotify listening habits to determine your personality traits using the Big Five personality model.
 
+
+NOTE: not scalable due to Spotify API limit to 25 authorized users.
+
 ## Features
 
 - Spotify OAuth authentication
